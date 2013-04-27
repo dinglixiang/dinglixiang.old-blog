@@ -7,7 +7,7 @@
 	<meta name="author" content="Dinglixiang">
 
 	
-	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap Before：界面引入bootstrap。 在本次作业项目中，用户的注册、登录就是简单的对数据库的数据进行插入与读取等操作。 1.用户注册页面:Register.jsp &lt;form class="form- &hellip;">
+	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap Before：界面引入bootstrap。 用JSP的Session机制就可以让你拥有一个功能强大购物车程序，是不是很诱人呢？赶紧开始我们的程序吧！ 1.JSP Session 机制购物车之一构建的商品类 ◆ &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,6 +81,212 @@
     <article class="post">
 	<h2 class="title">
 		
+		<a href="/blog/2013/04/27/lian-ai-ingzhi-gou-wu-che-shi-xian/">
+		
+			恋爱ing之购物车实现</a>
+	</h2>
+	<div class="entry-content">
+		<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
+
+<p>用JSP的<code>Session</code>机制就可以让你拥有一个功能强大购物车程序，是不是很诱人呢？赶紧开始我们的程序吧！</p>
+
+<p><strong>1.JSP Session 机制购物车之一构建的商品类</strong></p>
+
+<p>◆写一个Product类，并定义商品的各个属性，返回商品属性的方法</p>
+
+<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/Product.java">Product.java</a></p>
+
+<pre><code>package pack;
+
+import java.util.*;
+public class Product {
+
+private int id,sales;//商品的id与销量
+private float price;  //商品的价格
+private String name,describe;//商品的名称与具体描述信息
+
+public Product(){
+    id=0;
+    sales=0;
+    price=0;
+    name=null;
+    describe=null;
+}
+
+public Product(int id,String name,float price,String describe,int sales){
+    this.id=id;
+    this.name=name;
+    this.price=price;
+    this.describe=describe;
+    this.sales=sales;
+}
+...//封装字段  
+
+}
+</code></pre>
+
+<p><strong>2.JSP Session 机制购物车之二购物车实现</strong></p>
+
+<p>◆在JavaBean中定义按照产品id查询出产品信息的方法（此方法用处很多）<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/FlowerBean.java">FindProductById（int id）</a>：</p>
+
+<p>SQL语句：<code>String strsql="select * from products where product_id="+id;</code></p>
+
+<p>◆然后建立Product(商品)对象goods，并建立建立ArrayList对象bills</p>
+
+<p>◆通过ArrayList对象的方法add()将商品对象添加到ArrayList对象bills中</p>
+
+<p>◆由于ArrayList对象是具有添加和删除成员的方法，从而实现多个商品存储管理于ArrayList对象</p>
+
+<p>◆将ArrayList对象bills存储于session对象当中，实现购物车功能</p>
+
+<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/MyCar.jsp">MyCar.jsp</a></p>
+
+<p>◆通过JavaBean调用FindProductById 方法，
+在MyCar.jsp的<code>&lt;head&gt;&lt;/head&gt;</code> 标签中添加：</p>
+
+<p><code>&lt;jsp:useBean id="flower" scope="application" class="pack.FlowerBean"/&gt;</code></p>
+
+<p>◆获取参数信息：</p>
+
+<pre><code>int id=Integer.parseInt(request.getParameter("id")); 
+Product tmp=flower.FindProductById(id);  
+String name=tmp.getName();
+int sales=tmp.getSales();
+String describe=tmp.getDescribe();
+float price=tmp.getPrice();
+</code></pre>
+
+<p>◆建立商品对象和ArrayList对象</p>
+
+<pre><code>Product goods=new Product(id,name,price,describe,sales);
+ArrayList bills=null;
+</code></pre>
+
+<p>◆如果session中从未写入过，则将建立的商品对象添加到ArrayList对象当中，并写入 session</p>
+
+<pre><code>if((ArrayList)session.getAttribute("car")==null)  
+{  
+  bills = new ArrayList();  
+  bills.add(goods);  
+  session.setAttribute("car",bills);  
+  response.sendRedirect("flowers.jsp");  
+}
+</code></pre>
+
+<p>◆如果ArrayList 对象不为空，则判断购入商品是否已经存在于车中,</p>
+
+<pre><code>else 
+{  
+ bills=(ArrayList)session.getAttribute("car");
+ Iterator iter=bills.iterator();
+  for(int i=0;i&lt;bills.size();i++){
+       Product p1=(Product)bills.get(i);
+</code></pre>
+
+<p>◆如果购入商品已经存在，则打印输入提示信息</p>
+
+<pre><code>       if(p1.getId()==goods.getId())
+       {
+           out.println("&lt;script language=javascript&gt;alert('已购买！');history.go(-1)&lt;/script&gt;");
+            return;
+        }
+    }
+</code></pre>
+
+<p>◆如果购入商品不存在，则直接将商品添加到ArrayList对象当中，并写入 session</p>
+
+<pre><code>    bills.add(goods);
+    response.sendRedirect("flowers.jsp");
+}
+</code></pre>
+
+<p><strong>3.JSP Session 机制购物车之三删除商品</strong></p>
+
+<p>◆对购物车中的商品进行删除操作</p>
+
+<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/removeGoods.jsp">removeGoods.jsp</a></p>
+
+<p>◆获取参数信息</p>
+
+<pre><code>int id=Integer.parseInt(request.getParameter("id"));
+   Product tmp=flower.FindProductById(id);  
+   String name=tmp.getName();
+   int sales=tmp.getSales();
+   String describe=tmp.getDescribe();
+   float price=tmp.getPrice();
+</code></pre>
+
+<p>◆创建符合条件参数要删除的商品对象</p>
+
+<pre><code>Product goods=new Product(id,name,price,describe,sales);
+</code></pre>
+
+<p>◆获取session 中存储的ArrayList对象</p>
+
+<pre><code>ArrayList products=(ArrayList)session.getAttribute("car"); 
+Iterator iter=products.iterator(); 
+</code></pre>
+
+<p>◆遍历ArrayList对象，并将ArrayList对象中的元素和创建的符合参数条件要删除的商品进行比较</p>
+
+<pre><code>while(iter.hasNext()){
+        Product p=(Product)iter.next();
+        ◆查询是否有ArrayList对象中的元素与要删除的商品相同
+        if(p.getId()==goods.getId()){
+            int index=products.indexOf(p);
+            products.remove(index);  //删除
+            session.setAttribute("car",products); 
+            response.sendRedirect("Cart.jsp"); 
+            return;
+        }
+    }
+</code></pre>
+
+<p><strong>4.JSP Session 机制购物车之四清空购物车</strong></p>
+
+<p>在购买完商品的时候，我们需要清空购物车session中的数据，如下：</p>
+
+<p><code>session.removeAttribute("car");</code></p>
+
+<p>JSP Session 机制购物车是不是使你眼睛豁然一亮的感觉呢？赶紧开始吧，JSP Session机制的使用期待你的尝试。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T13:52:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
+
+
+</div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
 		<a href="/blog/2013/04/27/lian-ai-ingzhi-jian-dan-zhu-ce-deng-lu/">
 		
 			恋爱ing之简单注册登录</a>
@@ -90,7 +296,7 @@
 
 <p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
 
-<p>Before：界面引入bootstrap。</p>
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
 
 <p>在本次作业项目中，用户的注册、登录就是简单的对数据库的数据进行插入与读取等操作。</p>
 
@@ -145,6 +351,10 @@
 
 <time datetime="2013-04-27T13:27:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time></div>
 	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
+
 
 </div>
 	
