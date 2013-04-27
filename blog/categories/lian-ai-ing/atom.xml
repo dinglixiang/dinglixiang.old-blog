@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 恋爱ing | Dinglixiang]]></title>
   <link href="http://dinglixiang.github.io/blog/categories/lian-ai-ing/atom.xml" rel="self"/>
   <link href="http://dinglixiang.github.io/"/>
-  <updated>2013-04-27T15:01:22+08:00</updated>
+  <updated>2013-04-27T15:21:23+08:00</updated>
   <id>http://dinglixiang.github.io/</id>
   <author>
     <name><![CDATA[Dinglixiang]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[恋爱ing之返回顶部、底部]]></title>
+    <link href="http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-fan-hui-ding-bu-%2C-di-bu/"/>
+    <updated>2013-04-27T15:10:00+08:00</updated>
+    <id>http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-fan-hui-ding-bu-,-di-bu</id>
+    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p>当页面信息过多时，为方便信息的浏览，人性化操作，特加入返回顶部、底部功能。</p>
+
+<p>通过网上搜索，找到如下方法。
+以<a href="https://github.com/dinglixiang/Shopping/blob/master/web/FlowerDetails.jsp">FlowerDetails.jsp</a>为例。</p>
+
+<p><strong>1.在<code>&lt;head&gt;&lt;/head&gt;</code>标签中加入如下js脚本，并引入<a href="https://github.com/dinglixiang/Shopping/tree/master/web">js文件</a>：</strong></p>
+
+<pre><code>&lt;script type="text/javascript" src="jquery-1.4.1.js"&gt;&lt;/script&gt;
+&lt;style type="text/css"&gt;
+    .go{width:47px;height:65px;position:fixed;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||200)-(parseInt(this.currentStyle.marginBottom,10)||0)));right:20px;bottom:30%; background-color: lightgoldenrodyellow; background-repeat:no-repeat;}
+    .go a{text-indent:999em;width:37px;margin:5px;border:0;overflow:hidden;float:left; cursor:pointer;}
+    .go .top{background-position:0 0px;height:22px;background-image: url(./images/a.jpg);}
+    .go .feedback{background-position:0 -22px;height:32px}
+    .go .bottom{background-position:0 -55px;height:22px;background-image: url(./images/a.jpg);}
+    .go .top:hover{background-position:-38px -0px}
+    .go .feedback:hover{background-position:-38px -22px }
+    .go .bottom:hover{background-position:-38px -55px}
+    &lt;/style&gt;
+    &lt;script type="text/javascript"&gt;
+        $(function () {
+
+            $(".top").click(//定义返回顶部点击向上滚动的动画
+            function () {
+                $('html,body').animate({ scrollTop: 0 }, 700);
+            });
+            $(".bottom").click(//定义返回顶部点击向上滚动的动画
+            function () {
+                $('html,body').animate({ scrollTop: document.body.clientHeight }, 700);
+
+            });
+
+        })
+&lt;/script&gt;
+</code></pre>
+
+<p><strong>2.在<code>&lt;/body&gt;</code>标签之前加入如下代码：</strong></p>
+
+<pre><code>&lt;div class="go"&gt;
+  &lt;a title="返回顶部" class="top"&gt;&lt;/a&gt;
+  &lt;a title="返回底部" class="bottom" &gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>最后，页面信息过多时，即可查看效果。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[恋爱ing之商品搜索]]></title>
+    <link href="http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-shang-pin-sou-suo/"/>
+    <updated>2013-04-27T15:01:00+08:00</updated>
+    <id>http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-shang-pin-sou-suo</id>
+    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
+
+<p>本项目的搜索仅限于模糊搜索。</p>
+
+<p><strong>1.搜索样式表单：</strong></p>
+
+<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/flowers.jsp">flowers.jsp</a></p>
+
+<pre><code>&lt;form class="navbar-search pull-search" action="SearchResult.jsp"&gt;                                              
+ &lt;input type="text" class="search-query" name="condition"&gt;
+ &lt;button type="submit" class="btn" &gt;搜索&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p><strong>2.处理表单数据</strong>
+◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/SearchResult.jsp">SearchResult.jsp</a>，通过javaBean调用<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/FlowerBean.java">SearchResult方法</a>,调用方法请参考前几篇blog。</p>
+
+<pre><code>//接受搜索条件参数
+String condition=request.getParameter("condition");
+//通过javaBean调用搜索方法
+ArrayList flowers=flower.SearchResult(condition);
+//循环输出结果
+Iterator iter=flowers.iterator();
+......此处省略
+</code></pre>
+
+<p>◆调用pack.FlowerBean.java中
+<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/FlowerBean.java">SearchResult方法</a></p>
+
+<pre><code>//模糊查询的sql语句
+String strsql="select * from products where product_name like "+"'%"+condition+"%'";
+</code></pre>
+
+<p>OK，我就实现了这么一点模糊查询的功能了。后续可能会添加更加强大点的搜索~~~</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[恋爱ing之购买数量的加减]]></title>
@@ -28,7 +130,7 @@
 
 <p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/flowers.jsp">flowers.jsp</a></p>
 
-<p>jsp 样式：</p>
+<p>jsp加减样式：</p>
 
 <pre><code>&lt;input type="button" class="btn" value="-" onclick="minus(&lt;%=p.getId()%&gt;)"&gt;
 &lt;input type="text" class="span1"  value="1" id="&lt;%=p.getId() %&gt;"&gt;
@@ -232,227 +334,6 @@ response.setHeader("REFRESH",content);
 <p>另外要注意：它不能改变浏览器地址，刷新的话会导致重复提交.</p>
 
 <p>ps:<em>本项目的注册等页面(<a href="https://github.com/dinglixiang/Shopping/blob/master/web/RegisterUser.jsp">RegisterUser.jsp</a>)有一点点使用。</em></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[恋爱ing之购物车实现]]></title>
-    <link href="http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-gou-wu-che-shi-xian/"/>
-    <updated>2013-04-27T13:52:00+08:00</updated>
-    <id>http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-gou-wu-che-shi-xian</id>
-    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
-
-<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
-
-<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
-
-<p>用JSP的<code>Session</code>机制就可以让你拥有一个功能强大购物车程序，是不是很诱人呢？赶紧开始我们的程序吧！</p>
-
-<p><strong>1.JSP Session 机制购物车之一构建的商品类</strong></p>
-
-<p>◆写一个Product类，并定义商品的各个属性，返回商品属性的方法</p>
-
-<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/Product.java">Product.java</a></p>
-
-<pre><code>package pack;
-
-import java.util.*;
-public class Product {
-
-private int id,sales;//商品的id与销量
-private float price;  //商品的价格
-private String name,describe;//商品的名称与具体描述信息
-
-public Product(){
-    id=0;
-    sales=0;
-    price=0;
-    name=null;
-    describe=null;
-}
-
-public Product(int id,String name,float price,String describe,int sales){
-    this.id=id;
-    this.name=name;
-    this.price=price;
-    this.describe=describe;
-    this.sales=sales;
-}
-...//封装字段  
-
-}
-</code></pre>
-
-<p><strong>2.JSP Session 机制购物车之二购物车实现</strong></p>
-
-<p>◆在JavaBean中定义按照产品id查询出产品信息的方法（此方法用处很多）<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/FlowerBean.java">FindProductById（int id）</a>：</p>
-
-<p>SQL语句：<code>String strsql="select * from products where product_id="+id;</code></p>
-
-<p>◆然后建立Product(商品)对象goods，并建立建立ArrayList对象bills</p>
-
-<p>◆通过ArrayList对象的方法add()将商品对象添加到ArrayList对象bills中</p>
-
-<p>◆由于ArrayList对象是具有添加和删除成员的方法，从而实现多个商品存储管理于ArrayList对象</p>
-
-<p>◆将ArrayList对象bills存储于session对象当中，实现购物车功能</p>
-
-<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/MyCar.jsp">MyCar.jsp</a></p>
-
-<p>◆通过JavaBean调用FindProductById 方法，
-在MyCar.jsp的<code>&lt;head&gt;&lt;/head&gt;</code> 标签中添加：</p>
-
-<p><code>&lt;jsp:useBean id="flower" scope="application" class="pack.FlowerBean"/&gt;</code></p>
-
-<p>◆获取参数信息：</p>
-
-<pre><code>int id=Integer.parseInt(request.getParameter("id")); 
-Product tmp=flower.FindProductById(id);  
-String name=tmp.getName();
-int sales=tmp.getSales();
-String describe=tmp.getDescribe();
-float price=tmp.getPrice();
-</code></pre>
-
-<p>◆建立商品对象和ArrayList对象</p>
-
-<pre><code>Product goods=new Product(id,name,price,describe,sales);
-ArrayList bills=null;
-</code></pre>
-
-<p>◆如果session中从未写入过，则将建立的商品对象添加到ArrayList对象当中，并写入 session</p>
-
-<pre><code>if((ArrayList)session.getAttribute("car")==null)  
-{  
-  bills = new ArrayList();  
-  bills.add(goods);  
-  session.setAttribute("car",bills);  
-  response.sendRedirect("flowers.jsp");  
-}
-</code></pre>
-
-<p>◆如果ArrayList 对象不为空，则判断购入商品是否已经存在于车中,</p>
-
-<pre><code>else 
-{  
- bills=(ArrayList)session.getAttribute("car");
- Iterator iter=bills.iterator();
-  for(int i=0;i&lt;bills.size();i++){
-       Product p1=(Product)bills.get(i);
-</code></pre>
-
-<p>◆如果购入商品已经存在，则打印输入提示信息</p>
-
-<pre><code>       if(p1.getId()==goods.getId())
-       {
-           out.println("&lt;script language=javascript&gt;alert('已购买！');history.go(-1)&lt;/script&gt;");
-            return;
-        }
-    }
-</code></pre>
-
-<p>◆如果购入商品不存在，则直接将商品添加到ArrayList对象当中，并写入 session</p>
-
-<pre><code>    bills.add(goods);
-    response.sendRedirect("flowers.jsp");
-}
-</code></pre>
-
-<p><strong>3.JSP Session 机制购物车之三删除商品</strong></p>
-
-<p>◆对购物车中的商品进行删除操作</p>
-
-<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/removeGoods.jsp">removeGoods.jsp</a></p>
-
-<p>◆获取参数信息</p>
-
-<pre><code>int id=Integer.parseInt(request.getParameter("id"));
-   Product tmp=flower.FindProductById(id);  
-   String name=tmp.getName();
-   int sales=tmp.getSales();
-   String describe=tmp.getDescribe();
-   float price=tmp.getPrice();
-</code></pre>
-
-<p>◆创建符合条件参数要删除的商品对象</p>
-
-<pre><code>Product goods=new Product(id,name,price,describe,sales);
-</code></pre>
-
-<p>◆获取session 中存储的ArrayList对象</p>
-
-<pre><code>ArrayList products=(ArrayList)session.getAttribute("car"); 
-Iterator iter=products.iterator(); 
-</code></pre>
-
-<p>◆遍历ArrayList对象，并将ArrayList对象中的元素和创建的符合参数条件要删除的商品进行比较</p>
-
-<pre><code>while(iter.hasNext()){
-        Product p=(Product)iter.next();
-        ◆查询是否有ArrayList对象中的元素与要删除的商品相同
-        if(p.getId()==goods.getId()){
-            int index=products.indexOf(p);
-            products.remove(index);  //删除
-            session.setAttribute("car",products); 
-            response.sendRedirect("Cart.jsp"); 
-            return;
-        }
-    }
-</code></pre>
-
-<p><strong>4.JSP Session 机制购物车之四清空购物车</strong></p>
-
-<p>在购买完商品的时候，我们需要清空购物车session中的数据，如下：</p>
-
-<p><code>session.removeAttribute("car");</code></p>
-
-<p>JSP Session 机制购物车是不是使你眼睛豁然一亮的感觉呢？赶紧开始吧，JSP Session机制的使用期待你的尝试。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[恋爱ing之简单注册登录]]></title>
-    <link href="http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-jian-dan-zhu-ce-deng-lu/"/>
-    <updated>2013-04-27T13:27:00+08:00</updated>
-    <id>http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-jian-dan-zhu-ce-deng-lu</id>
-    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
-
-<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
-
-<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
-
-<p>在本次作业项目中，用户的注册、登录就是简单的对数据库的数据进行插入与读取等操作。</p>
-
-<p>1.<a href="https://github.com/dinglixiang/Shopping/blob/master/web/Register.jsp">用户注册页面</a>:Register.jsp</p>
-
-<pre><code>&lt;form class="form-signin" method="post" action="RegisterUser.jsp"&gt;
-&lt;h2&gt;注册&lt;/h2&gt;
- &lt;input type="text" class="input-block-level" placeholder="Email address" name="email"&gt;
- &lt;input type="password" class="input-block-level" placeholder="Password" name="password"&gt;
- &lt;input type="password" class="input-block-level" placeholder="Confirm Password" name="confirmpassword"&gt;
- &lt;button class="btn btn-large btn-primary" type="submit"&gt;Sign up&lt;/button&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>2.这里通过<code>javaBean</code>调用了<code>insertRegisterData()</code>方法.</p>
-
-<p>在<code>&lt;head&gt;&lt;/head&gt;</code>标签中加入：</p>
-
-<pre><code>&lt;jsp:useBean id="register" scope="application" class="pack.RegisterBean"/&gt;
-&lt;jsp:setProperty name="register" property="*"/&gt;
-</code></pre>
-
-<p>然后在RegisterUser.jsp中<a href="https://github.com/dinglixiang/Shopping/blob/master/web/RegisterUser.jsp">处理注册页面传递过来的数据</a></p>
-
-<p>在<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/RegisterBean.java">javaBean</a>中定义<code>insertRegisterData()</code>方法；</p>
-
-<p>此时注册的流程就完成了。</p>
-
-<p>3.登录就是将数据库数据读取出来并进行比较，在这就不多说了。</p>
-
-<p>可参考：
-<a href="https://github.com/dinglixiang/Shopping/blob/master/web/Login.jsp">登录界面</a> |
-<a href="https://github.com/dinglixiang/Shopping/blob/master/web/LoginValidate.jsp">登录验证</a> |         <a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/LoginBean.java">登录LoginBean</a>.</p>
 ]]></content>
   </entry>
   
