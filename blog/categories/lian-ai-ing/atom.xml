@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 恋爱ing | Dinglixiang]]></title>
   <link href="http://dinglixiang.github.io/blog/categories/lian-ai-ing/atom.xml" rel="self"/>
   <link href="http://dinglixiang.github.io/"/>
-  <updated>2013-04-27T14:50:57+08:00</updated>
+  <updated>2013-04-27T15:01:22+08:00</updated>
   <id>http://dinglixiang.github.io/</id>
   <author>
     <name><![CDATA[Dinglixiang]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[恋爱ing之购买数量的加减]]></title>
+    <link href="http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-gou-mai-shu-liang-de-jia-jian/"/>
+    <updated>2013-04-27T14:52:00+08:00</updated>
+    <id>http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-gou-mai-shu-liang-de-jia-jian</id>
+    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
+
+<p>通过js实现购买产品的数量的加减</p>
+
+<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/flowers.jsp">flowers.jsp</a></p>
+
+<p>jsp 样式：</p>
+
+<pre><code>&lt;input type="button" class="btn" value="-" onclick="minus(&lt;%=p.getId()%&gt;)"&gt;
+&lt;input type="text" class="span1"  value="1" id="&lt;%=p.getId() %&gt;"&gt;
+&lt;input type="button"  class="btn" value="+" onclick="plus(&lt;%=p.getId()%&gt;)"&gt;   
+</code></pre>
+
+<p>其中<code>p.getId()</code>是在页面展示产品时，循环产品的ArrayList获取的产品的<code>id</code>.</p>
+
+<p>在点击<code>-</code>、<code>+</code>的按钮时，调用<code>minus</code>和<code>plus</code>的方法，且此方法将产品的<code>id</code>作为参数传递。</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+function minus(id)
+{
+var count = document.getElementById(id).value;         
+document.getElementById(id).value = count-1;
+}
+&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
+function plus(id)
+{
+var number=document.getElementById(id).value;                                      
+var cont=parseInt(number)+1;
+document.getElementById(id).value = cont;
+}
+&lt;/script&gt;
+</code></pre>
+
+<p>在此简单说下为什么要用产品的id作为text的id，即此句。</p>
+
+<p><code>&lt;input type="text" class="span1"  value="1" id="&lt;%=p.getId() %&gt;"&gt;</code></p>
+
+<p>  其实最开始，我实现数量的加减的时候，id是一个字符串，是不变的，在调用js的方法时，通过计算加减1，但是显示的位置是不对的，总是在第一个产品的数量text框中。后来发现，我在循环输出产品信息的时候，每个产品都有一个数量的text框，而且他们的id名称都是相同的，通过 <code>document.getElementById(id).value = cont;</code>改变文本框value值的时候，也就只能改变第一个产品的数量text文本框中的值。所以，后来就采用了一个动态的<code>id</code>作为传递的值。</p>
+
+<p>  OK，至此，数量的加减操作已经完成了，可以将此值传递到下一个页面进行商品总价的计算了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[恋爱ing之购买商品销量增加]]></title>
@@ -399,32 +453,6 @@ Iterator iter=products.iterator();
 <p>可参考：
 <a href="https://github.com/dinglixiang/Shopping/blob/master/web/Login.jsp">登录界面</a> |
 <a href="https://github.com/dinglixiang/Shopping/blob/master/web/LoginValidate.jsp">登录验证</a> |         <a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/LoginBean.java">登录LoginBean</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[恋爱ing之项目样式]]></title>
-    <link href="http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-xiang-mu-yang-shi/"/>
-    <updated>2013-04-27T13:06:00+08:00</updated>
-    <id>http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-xiang-mu-yang-shi</id>
-    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
-
-<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
-
-<p>本作业项目采用开源 twitter样式bootstrap，在熟悉css的同时，也设计属于自己的网站样式。</p>
-
-<p>1.jsp中引入css文件：</p>
-
-<pre><code>&lt;link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" /&gt;
-</code></pre>
-
-<p>上面的<code>href</code>是css文件在项目中的路径，我是将bootstrap放在web根目录下的。</p>
-
-<p>主要设计的样式在<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a>的基础和组件部分。</p>
-
-<p>具体的样式效果可通过bootstrap的网站查看~~~</p>
-
-<p>当然在使用的时候，还需要通过自己写css改变部分样式。</p>
 ]]></content>
   </entry>
   
