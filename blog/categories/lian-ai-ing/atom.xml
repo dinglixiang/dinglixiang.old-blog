@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Dinglixiang]]></title>
-  <link href="http://dinglixiang.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: 恋爱ing | Dinglixiang]]></title>
+  <link href="http://dinglixiang.github.io/blog/categories/lian-ai-ing/atom.xml" rel="self"/>
   <link href="http://dinglixiang.github.io/"/>
   <updated>2013-04-27T13:25:09+08:00</updated>
   <id>http://dinglixiang.github.io/</id>
@@ -36,21 +36,6 @@
 <p>具体的样式效果可通过bootstrap的网站查看~~~</p>
 
 <p>当然在使用的时候，还需要通过自己写css改变部分样式。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[写自己的blog]]></title>
-    <link href="http://dinglixiang.github.io/blog/2013/04/19/xie-zi-ji-de-blog/"/>
-    <updated>2013-04-19T19:47:00+08:00</updated>
-    <id>http://dinglixiang.github.io/blog/2013/04/19/xie-zi-ji-de-blog</id>
-    <content type="html"><![CDATA[<p>今天手痒痒，把之前的blog给弄完蛋了，我又花了点时间重新弄了下，也感觉之前写的东西都不是很好，这次重新搭建blog就当是新生吧！</p>
-
-<p>希望在以后的时间里能够真实的有效的记录life的轨迹。</p>
-
-<p>Where there is a will, there is a way.</p>
-
-<p>以此句来勉励自己~~~</p>
 ]]></content>
   </entry>
   
