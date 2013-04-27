@@ -1,0 +1,216 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>恋爱ing之购买商品销量增加 - Dinglixiang</title>
+	<meta name="author" content="Dinglixiang">
+
+	
+	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap Before：界面引入bootstrap。 购买商品，不可避免的有销量这么一说。 ◆本项目中在点击商品加入购物车的同时，我也通过session将所购买的商品的数量存放起来。 ◆MyCar.jsp //加入小车时传递的参数 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Dinglixiang" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Dinglixiang</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about.html">About</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about.html">About</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:dinglixiang.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/dinglixiang" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:dinglixiang.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">恋爱ing之购买商品销量增加</h2>
+	<div class="entry-content"><blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
+
+<p>购买商品，不可避免的有销量这么一说。</p>
+
+<p>◆本项目中在点击商品加入购物车的同时，我也通过<code>session</code>将所购买的商品的数量存放起来。</p>
+
+<p>◆<a href="https://github.com/dinglixiang/Shopping/blob/master/web/MyCar.jsp">MyCar.jsp</a></p>
+
+<pre><code>//加入小车时传递的参数
+int id=Integer.parseInt(request.getParameter("id"));
+String count=request.getParameter("count");
+//设置session，以为可能购买商品的种类不是单一的，所以通过 "count"+id 来区分哪种商品所购买的数量
+session.setAttribute("count"+id,count);
+</code></pre>
+
+<p><strong>1.在购物车页面，也要通过数量计算商品的总价。</strong></p>
+
+<p>首先定义一个总价的变量：</p>
+
+<pre><code>float totalprice=0;
+</code></pre>
+
+<p>此处有循环输出，具体参考 Cart.jsp文件。</p>
+
+<pre><code>//获取到购物车中商品的购买数量
+String count=(String)session.getAttribute("count"+(p.getId()));                                
+int cnt=Integer.parseInt(count);
+</code></pre>
+
+<p>在循环每个购物车的session时，计算总价：</p>
+
+<pre><code>totalprice+=cnt*(p.getPrice()); 
+</code></pre>
+
+<p>最后在循环之外将总价显示出来。</p>
+
+<p><strong>2.购买完成之后，商品的销量要增加。</strong></p>
+
+<p>在订单信息页面（<a href="https://github.com/dinglixiang/Shopping/blob/master/web/OrderInfo.jsp">OrderInfo.jsp</a>）,循环过程中更新商品的销量。</p>
+
+<pre><code>//获取属于该商品的购买数量
+String count=(String)session.getAttribute("count"+(p.getId()));
+int cnt=Integer.parseInt(count);
+//更新数据库中的销量信息
+product.UpdateSalesById(p.getId(),p.getSales(),cnt);
+</code></pre>
+
+<p>同之前调用FindProductById一样，此时调用的<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/FlowerBean.java">UpdateSalesById方法</a>也是通过JavaBean调用。</p>
+
+<p>至此，商品销量的更新完成了。</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T14:43:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
+
+
+</div>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Dinglixiang
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'dinglixiang';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-gou-mai-shang-pin-xiao-liang-zeng-jia/';
+        var disqus_url = 'http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-gou-mai-shang-pin-xiao-liang-zeng-jia/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
