@@ -4,7 +4,7 @@
   <title><![CDATA[Dinglixiang]]></title>
   <link href="http://dinglixiang.github.io/atom.xml" rel="self"/>
   <link href="http://dinglixiang.github.io/"/>
-  <updated>2013-04-27T13:25:09+08:00</updated>
+  <updated>2013-04-27T13:51:33+08:00</updated>
   <id>http://dinglixiang.github.io/</id>
   <author>
     <name><![CDATA[Dinglixiang]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[恋爱ing之简单注册登录]]></title>
+    <link href="http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-jian-dan-zhu-ce-deng-lu/"/>
+    <updated>2013-04-27T13:27:00+08:00</updated>
+    <id>http://dinglixiang.github.io/blog/2013/04/27/lian-ai-ingzhi-jian-dan-zhu-ce-deng-lu</id>
+    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p>Before：界面引入bootstrap。</p>
+
+<p>在本次作业项目中，用户的注册、登录就是简单的对数据库的数据进行插入与读取等操作。</p>
+
+<p>1.<a href="https://github.com/dinglixiang/Shopping/blob/master/web/Register.jsp">用户注册页面</a>:Register.jsp</p>
+
+<pre><code>&lt;form class="form-signin" method="post" action="RegisterUser.jsp"&gt;
+&lt;h2&gt;注册&lt;/h2&gt;
+ &lt;input type="text" class="input-block-level" placeholder="Email address" name="email"&gt;
+ &lt;input type="password" class="input-block-level" placeholder="Password" name="password"&gt;
+ &lt;input type="password" class="input-block-level" placeholder="Confirm Password" name="confirmpassword"&gt;
+ &lt;button class="btn btn-large btn-primary" type="submit"&gt;Sign up&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>2.这里通过<code>javaBean</code>调用了<code>insertRegisterData()</code>方法.</p>
+
+<p>在<code>&lt;head&gt;&lt;/head&gt;</code>标签中加入：</p>
+
+<pre><code>&lt;jsp:useBean id="register" scope="application" class="pack.RegisterBean"/&gt;
+&lt;jsp:setProperty name="register" property="*"/&gt;
+</code></pre>
+
+<p>然后在RegisterUser.jsp中<a href="https://github.com/dinglixiang/Shopping/blob/master/web/RegisterUser.jsp">处理注册页面传递过来的数据</a></p>
+
+<p>在<a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/RegisterBean.java">javaBean</a>中定义<code>insertRegisterData()</code>方法；</p>
+
+<p>此时注册的流程就完成了。</p>
+
+<p>3.登录就是将数据库数据读取出来并进行比较，在这就不多说了。</p>
+
+<p>可参考：
+<a href="https://github.com/dinglixiang/Shopping/blob/master/web/Login.jsp">登录界面</a> |
+<a href="https://github.com/dinglixiang/Shopping/blob/master/web/LoginValidate.jsp">登录验证</a> |         <a href="https://github.com/dinglixiang/Shopping/blob/master/src/java/pack/LoginBean.java">登录LoginBean</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[恋爱ing之项目样式]]></title>
