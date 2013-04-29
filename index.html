@@ -7,8 +7,7 @@
 	<meta name="author" content="Dinglixiang">
 
 	
-	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap 当页面信息过多时，为方便信息的浏览，人性化操作，特加入返回顶部、底部功能。 通过网上搜索，找到如下方法。
-以FlowerDetails.jsp为例。 1.在&lt;head&gt;&lt;/head&gt; &hellip;">
+	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap Before：界面引入bootstrap。 在本项目中，为了方便快捷，我是将管理员的账号密码等信息放在配置文件web.xml中的。 如在web.xml文件中，有以下配置信息： &lt;context-param&gt &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,6 +76,68 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/04/29/lian-ai-ingzhi-du-qu-pei-zhi-xin-xi/">
+		
+			恋爱ing之读取配置信息</a>
+	</h2>
+	<div class="entry-content">
+		<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
+
+<p>在本项目中，为了方便快捷，我是将管理员的账号密码等信息放在配置文件<code>web.xml</code>中的。</p>
+
+<p>如在<a href="https://github.com/dinglixiang/Shopping/blob/master/web/WEB-INF/web.xml">web.xml</a>文件中，有以下配置信息：</p>
+
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;email&lt;/param-name&gt;
+    &lt;param-value&gt;admin@gmail.com&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+
+<p>那么，怎样读取这个配置账号呢？</p>
+
+<p>◆ 在jsp页面中，可以通过 <code>${initParam.email}</code>直接获取到配置文件的信息并显示在页面上，但是在管理员登录时，我们还要进行信息的比较。</p>
+
+<p>如何在jsp 的&lt;%  %>中获取配置信息呢？</p>
+
+<p>我们可通过 <code>application.getInitParameter("email")</code> 来获取<code>web.xml</code>中的<code>email</code>的值，从而与登录界面传递的值进行比较验证。如：<a href="https://github.com/dinglixiang/Shopping/blob/master/web/AdminValidate.jsp">AdminValidate.jsp</a> 所示。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-29T15:18:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
+
+
+</div>
+	
+</div></article>
 
 
     <article class="post">

@@ -1,0 +1,185 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>恋爱ing之读取配置信息 - Dinglixiang</title>
+	<meta name="author" content="Dinglixiang">
+
+	
+	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap Before：界面引入bootstrap。 在本项目中，为了方便快捷，我是将管理员的账号密码等信息放在配置文件web.xml中的。 如在web.xml文件中，有以下配置信息： &lt;context-param&gt &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Dinglixiang" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Dinglixiang</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about.html">About</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about.html">About</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:dinglixiang.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/dinglixiang" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:dinglixiang.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">恋爱ing之读取配置信息</h2>
+	<div class="entry-content"><blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
+
+<p>在本项目中，为了方便快捷，我是将管理员的账号密码等信息放在配置文件<code>web.xml</code>中的。</p>
+
+<p>如在<a href="https://github.com/dinglixiang/Shopping/blob/master/web/WEB-INF/web.xml">web.xml</a>文件中，有以下配置信息：</p>
+
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;email&lt;/param-name&gt;
+    &lt;param-value&gt;admin@gmail.com&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+
+<p>那么，怎样读取这个配置账号呢？</p>
+
+<p>◆ 在jsp页面中，可以通过 <code>${initParam.email}</code>直接获取到配置文件的信息并显示在页面上，但是在管理员登录时，我们还要进行信息的比较。</p>
+
+<p>如何在jsp 的&lt;%  %>中获取配置信息呢？</p>
+
+<p>我们可通过 <code>application.getInitParameter("email")</code> 来获取<code>web.xml</code>中的<code>email</code>的值，从而与登录界面传递的值进行比较验证。如：<a href="https://github.com/dinglixiang/Shopping/blob/master/web/AdminValidate.jsp">AdminValidate.jsp</a> 所示。</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-29T15:18:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
+
+
+</div>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Dinglixiang
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'dinglixiang';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dinglixiang.github.io/blog/2013/04/29/lian-ai-ingzhi-du-qu-pei-zhi-xin-xi/';
+        var disqus_url = 'http://dinglixiang.github.io/blog/2013/04/29/lian-ai-ingzhi-du-qu-pei-zhi-xin-xi/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
