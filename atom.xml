@@ -4,7 +4,7 @@
   <title><![CDATA[Dinglixiang]]></title>
   <link href="http://dinglixiang.github.io/atom.xml" rel="self"/>
   <link href="http://dinglixiang.github.io/"/>
-  <updated>2013-04-29T15:29:09+08:00</updated>
+  <updated>2013-04-29T15:49:25+08:00</updated>
   <id>http://dinglixiang.github.io/</id>
   <author>
     <name><![CDATA[Dinglixiang]]></name>
@@ -12,6 +12,98 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[恋爱ing之富文本编辑器ckeditor]]></title>
+    <link href="http://dinglixiang.github.io/blog/2013/04/29/lian-ai-ingzhi-fu-wen-ben-bian-ji-qi-ckeditor/"/>
+    <updated>2013-04-29T15:42:00+08:00</updated>
+    <id>http://dinglixiang.github.io/blog/2013/04/29/lian-ai-ingzhi-fu-wen-ben-bian-ji-qi-ckeditor</id>
+    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
+
+<p>在处理商品添加时，商品的描述信息会有很多，使用富文本编辑器可以很好的处理这个问题。</p>
+
+<p>感觉别人写的已经很好了，我自己也没什么可以添加的！</p>
+
+<p>直接贴链接~~~</p>
+
+<p><a href="http://czq5783095.iteye.com/blog/1317897">http://czq5783095.iteye.com/blog/1317897</a></p>
+
+<p><a href="http://hi.baidu.com/caoji1117/item/6fcba8bd1d8455f363388e47">http://hi.baidu.com/caoji1117/item/6fcba8bd1d8455f363388e47</a></p>
+
+<p><a href="http://ckeditor.com/">ckeditor官网</a>，在此可下载ckeditor的压缩包与jar文件，以及查看官方的使用文档。</p>
+
+<p>我的ckeditor在jsp中的代码可在<a href="https://github.com/dinglixiang/Shopping/blob/master/web/NewProduct.jsp">新建产品时的描述信息</a>查看。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[恋爱ing之Javascript控制文本框只能输入数字]]></title>
+    <link href="http://dinglixiang.github.io/blog/2013/04/29/lian-ai-ingzhi-javascriptkong-zhi-wen-ben-kuang-zhi-neng-shu-ru-shu-zi/"/>
+    <updated>2013-04-29T15:30:00+08:00</updated>
+    <id>http://dinglixiang.github.io/blog/2013/04/29/lian-ai-ingzhi-javascriptkong-zhi-wen-ben-kuang-zhi-neng-shu-ru-shu-zi</id>
+    <content type="html"><![CDATA[<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p>在填写如商品价格时，我们需要加入一些限制，如只能输入数字与小数点的限制。</p>
+
+<p>◆ Javascript代码</p>
+
+<pre><code>&lt;input   
+onkeypress = "return event.keyCode&gt;=48&amp;&amp;event.keyCode&lt;=57||        event.keyCode==46"   
+onpaste = "return !clipboardData.getData('text').match(/\D/)"   
+ondragenter = "return false"   
+style = "ime-mode:Disabled"   
+/&gt;   
+</code></pre>
+
+<p>说明：</p>
+
+<p>1.只能输入0到9和小数点</p>
+
+<p>2.只能粘贴数字</p>
+
+<p>3.不能拖动内容进来</p>
+
+<p>4.禁止使用输入法</p>
+
+<p>上面代码出处：<a href="http://www.cnblogs.com/cloudgamer/articles/1138136.html">http://www.cnblogs.com/cloudgamer/articles/1138136.html</a></p>
+
+<p>但是在上述代码的限制中，我是可以添加 N 多个小数点的，并不能完全满足我的需求。</p>
+
+<p>将其改进的代码如下：</p>
+
+<p>◆ <strong>只能输入数字和一个点，且输入的第一个字符不能为点，可按退格键删除数字或点</strong></p>
+
+<pre><code>&lt;script type ="text/javascript " &gt;
+        function vailFloatNumberPerfect(evnt,obj){
+         evnt=evnt||window.event;
+         var keyCode=window.event?evnt.keyCode:evnt.which;
+         if((obj.value.length==0 || obj.value.indexOf(".")!=-1) &amp;&amp; keyCode==46) return false;
+         return keyCode&gt;=48&amp;&amp;keyCode&lt;=57||keyCode==46||keyCode==8;
+        }
+&lt;/script&gt;
+</code></pre>
+
+<p>使用：</p>
+
+<pre><code>&lt;input   
+onkeypress = "return vaildFloatNumberPerfect(event,this) "   
+onpaste = "return !clipboardData.getData('text').match(/\D/) "   
+ondragenter = "return false "   
+style = "ime-mode:Disabled "   
+/&gt; 
+</code></pre>
+
+<p>如：<a href="https://github.com/dinglixiang/Shopping/blob/master/web/NewProduct.jsp">新建产品时的价格</a></p>
+
+<p>参考自： <a href="http://www.denghuafeng.com/post-109.html">http://www.denghuafeng.com/post-109.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[恋爱ing之读取配置信息]]></title>

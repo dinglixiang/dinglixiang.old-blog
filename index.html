@@ -7,7 +7,7 @@
 	<meta name="author" content="Dinglixiang">
 
 	
-	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap Before：界面引入bootstrap。 在本项目中，为了方便快捷，我是将管理员的账号密码等信息放在配置文件web.xml中的。 如在web.xml文件中，有以下配置信息： &lt;context-param&gt &hellip;">
+	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap Before：界面引入bootstrap。 在处理商品添加时，商品的描述信息会有很多，使用富文本编辑器可以很好的处理这个问题。 感觉别人写的已经很好了，我自己也没什么可以添加的！ 直接贴链接~~~ http:// &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -76,6 +76,160 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/04/29/lian-ai-ingzhi-fu-wen-ben-bian-ji-qi-ckeditor/">
+		
+			恋爱ing之富文本编辑器ckeditor</a>
+	</h2>
+	<div class="entry-content">
+		<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p><strong><em>Before：界面引入bootstrap。</em></strong></p>
+
+<p>在处理商品添加时，商品的描述信息会有很多，使用富文本编辑器可以很好的处理这个问题。</p>
+
+<p>感觉别人写的已经很好了，我自己也没什么可以添加的！</p>
+
+<p>直接贴链接~~~</p>
+
+<p><a href="http://czq5783095.iteye.com/blog/1317897">http://czq5783095.iteye.com/blog/1317897</a></p>
+
+<p><a href="http://hi.baidu.com/caoji1117/item/6fcba8bd1d8455f363388e47">http://hi.baidu.com/caoji1117/item/6fcba8bd1d8455f363388e47</a></p>
+
+<p><a href="http://ckeditor.com/">ckeditor官网</a>，在此可下载ckeditor的压缩包与jar文件，以及查看官方的使用文档。</p>
+
+<p>我的ckeditor在jsp中的代码可在<a href="https://github.com/dinglixiang/Shopping/blob/master/web/NewProduct.jsp">新建产品时的描述信息</a>查看。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-29T15:42:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
+
+
+</div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/04/29/lian-ai-ingzhi-javascriptkong-zhi-wen-ben-kuang-zhi-neng-shu-ru-shu-zi/">
+		
+			恋爱ing之Javascript控制文本框只能输入数字</a>
+	</h2>
+	<div class="entry-content">
+		<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p>在填写如商品价格时，我们需要加入一些限制，如只能输入数字与小数点的限制。</p>
+
+<p>◆ Javascript代码</p>
+
+<pre><code>&lt;input   
+onkeypress = "return event.keyCode&gt;=48&amp;&amp;event.keyCode&lt;=57||        event.keyCode==46"   
+onpaste = "return !clipboardData.getData('text').match(/\D/)"   
+ondragenter = "return false"   
+style = "ime-mode:Disabled"   
+/&gt;   
+</code></pre>
+
+<p>说明：</p>
+
+<p>1.只能输入0到9和小数点</p>
+
+<p>2.只能粘贴数字</p>
+
+<p>3.不能拖动内容进来</p>
+
+<p>4.禁止使用输入法</p>
+
+<p>上面代码出处：<a href="http://www.cnblogs.com/cloudgamer/articles/1138136.html">http://www.cnblogs.com/cloudgamer/articles/1138136.html</a></p>
+
+<p>但是在上述代码的限制中，我是可以添加 N 多个小数点的，并不能完全满足我的需求。</p>
+
+<p>将其改进的代码如下：</p>
+
+<p>◆ <strong>只能输入数字和一个点，且输入的第一个字符不能为点，可按退格键删除数字或点</strong></p>
+
+<pre><code>&lt;script type ="text/javascript " &gt;
+        function vailFloatNumberPerfect(evnt,obj){
+         evnt=evnt||window.event;
+         var keyCode=window.event?evnt.keyCode:evnt.which;
+         if((obj.value.length==0 || obj.value.indexOf(".")!=-1) &amp;&amp; keyCode==46) return false;
+         return keyCode&gt;=48&amp;&amp;keyCode&lt;=57||keyCode==46||keyCode==8;
+        }
+&lt;/script&gt;
+</code></pre>
+
+<p>使用：</p>
+
+<pre><code>&lt;input   
+onkeypress = "return vaildFloatNumberPerfect(event,this) "   
+onpaste = "return !clipboardData.getData('text').match(/\D/) "   
+ondragenter = "return false "   
+style = "ime-mode:Disabled "   
+/&gt; 
+</code></pre>
+
+<p>如：<a href="https://github.com/dinglixiang/Shopping/blob/master/web/NewProduct.jsp">新建产品时的价格</a></p>
+
+<p>参考自： <a href="http://www.denghuafeng.com/post-109.html">http://www.denghuafeng.com/post-109.html</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-29T15:30:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
+
+
+</div>
+	
+</div></article>
 
 
     <article class="post">
@@ -901,111 +1055,10 @@ Iterator iter=products.iterator();
 	
 </div></article>
 
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/04/27/lian-ai-ingzhi-xiang-mu-yang-shi/">
-		
-			恋爱ing之项目样式</a>
-	</h2>
-	<div class="entry-content">
-		<blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
-
-<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
-
-<p>本作业项目采用开源 twitter样式bootstrap，在熟悉css的同时，也设计属于自己的网站样式。</p>
-
-<p>1.jsp中引入css文件：</p>
-
-<pre><code>&lt;link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" /&gt;
-</code></pre>
-
-<p>上面的<code>href</code>是css文件在项目中的路径，我是将bootstrap放在web根目录下的。</p>
-
-<p>主要设计的样式在<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a>的基础和组件部分。</p>
-
-<p>具体的样式效果可通过bootstrap的网站查看~~~</p>
-
-<p>当然在使用的时候，还需要通过自己写css改变部分样式。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-27T13:06:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
-
-
-</div>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/04/19/xie-zi-ji-de-blog/">
-		
-			写自己的blog</a>
-	</h2>
-	<div class="entry-content">
-		<p>今天手痒痒，把之前的blog给弄完蛋了，我又花了点时间重新弄了下，也感觉之前写的东西都不是很好，这次重新搭建blog就当是新生吧！</p>
-
-<p>希望在以后的时间里能够真实的有效的记录life的轨迹。</p>
-
-<p>Where there is a will, there is a way.</p>
-
-<p>以此句来勉励自己~~~</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-19T19:47:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/life/'>life</a>
-
-
-</div>
-	
-</div></article>
-
 <nav id="pagenavi">
     
+    
+        <a href="/blog/page/2/" class="next">Next</a>
     
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav></div>

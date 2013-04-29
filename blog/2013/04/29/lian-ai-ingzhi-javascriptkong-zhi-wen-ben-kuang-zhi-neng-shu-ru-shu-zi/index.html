@@ -1,0 +1,219 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>恋爱ing之Javascript控制文本框只能输入数字 - Dinglixiang</title>
+	<meta name="author" content="Dinglixiang">
+
+	
+	<meta name="description" content="项目github地址：恋爱ing bootstrap地址：Bootstrap 在填写如商品价格时，我们需要加入一些限制，如只能输入数字与小数点的限制。 ◆ Javascript代码 &lt;input onkeypress = "return event.keyCode&gt;=48&amp;& &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Dinglixiang" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Dinglixiang</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about.html">About</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/about.html">About</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:dinglixiang.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/dinglixiang" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:dinglixiang.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">恋爱ing之Javascript控制文本框只能输入数字</h2>
+	<div class="entry-content"><blockquote><p>项目github地址：<a href="https://github.com/dinglixiang/Shopping">恋爱ing </a></p>
+
+<p>bootstrap地址：<a href="http://xiemin.me/bootstrap-2.3.0/">Bootstrap</a></p></blockquote>
+
+<p>在填写如商品价格时，我们需要加入一些限制，如只能输入数字与小数点的限制。</p>
+
+<p>◆ Javascript代码</p>
+
+<pre><code>&lt;input   
+onkeypress = "return event.keyCode&gt;=48&amp;&amp;event.keyCode&lt;=57||        event.keyCode==46"   
+onpaste = "return !clipboardData.getData('text').match(/\D/)"   
+ondragenter = "return false"   
+style = "ime-mode:Disabled"   
+/&gt;   
+</code></pre>
+
+<p>说明：</p>
+
+<p>1.只能输入0到9和小数点</p>
+
+<p>2.只能粘贴数字</p>
+
+<p>3.不能拖动内容进来</p>
+
+<p>4.禁止使用输入法</p>
+
+<p>上面代码出处：<a href="http://www.cnblogs.com/cloudgamer/articles/1138136.html">http://www.cnblogs.com/cloudgamer/articles/1138136.html</a></p>
+
+<p>但是在上述代码的限制中，我是可以添加 N 多个小数点的，并不能完全满足我的需求。</p>
+
+<p>将其改进的代码如下：</p>
+
+<p>◆ <strong>只能输入数字和一个点，且输入的第一个字符不能为点，可按退格键删除数字或点</strong></p>
+
+<pre><code>&lt;script type ="text/javascript " &gt;
+        function vailFloatNumberPerfect(evnt,obj){
+         evnt=evnt||window.event;
+         var keyCode=window.event?evnt.keyCode:evnt.which;
+         if((obj.value.length==0 || obj.value.indexOf(".")!=-1) &amp;&amp; keyCode==46) return false;
+         return keyCode&gt;=48&amp;&amp;keyCode&lt;=57||keyCode==46||keyCode==8;
+        }
+&lt;/script&gt;
+</code></pre>
+
+<p>使用：</p>
+
+<pre><code>&lt;input   
+onkeypress = "return vaildFloatNumberPerfect(event,this) "   
+onpaste = "return !clipboardData.getData('text').match(/\D/) "   
+ondragenter = "return false "   
+style = "ime-mode:Disabled "   
+/&gt; 
+</code></pre>
+
+<p>如：<a href="https://github.com/dinglixiang/Shopping/blob/master/web/NewProduct.jsp">新建产品时的价格</a></p>
+
+<p>参考自： <a href="http://www.denghuafeng.com/post-109.html">http://www.denghuafeng.com/post-109.html</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-29T15:30:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/lian-ai-ing/'>恋爱ing</a>
+
+
+</div>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Dinglixiang
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'dinglixiang';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dinglixiang.github.io/blog/2013/04/29/lian-ai-ingzhi-javascriptkong-zhi-wen-ben-kuang-zhi-neng-shu-ru-shu-zi/';
+        var disqus_url = 'http://dinglixiang.github.io/blog/2013/04/29/lian-ai-ingzhi-javascriptkong-zhi-wen-ben-kuang-zhi-neng-shu-ru-shu-zi/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
